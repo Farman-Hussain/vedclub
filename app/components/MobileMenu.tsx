@@ -2,14 +2,14 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Menu, X, HeartPulse, Stethoscope, Leaf, BookOpen, Utensils, Briefcase } from "lucide-react";
-import LanguageSwitcher from "../LanguageSwitcher";
+import { usePathname, useRouter } from "next/navigation";
+import { Menu, X, HeartPulse, Stethoscope, Leaf, BookOpen, Utensils, Briefcase, Languages } from "lucide-react";
 
 export default function MobileMenu() {
-  const[isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  const router = useRouter(); // 🔥 Added router to handle language switching
   
   const isHindi = pathname.startsWith("/hi");
 
@@ -25,18 +25,37 @@ export default function MobileMenu() {
     return () => { document.body.style.overflow = "auto"; };
   }, [isOpen]);
 
+  // 🔥 Bulletproof mobile language toggle function
+  const toggleLanguage = () => {
+    if (isHindi) {
+      // Switch to English: Remove '/hi' from the URL
+      const newPath = pathname.replace(/^\/hi/, '') || '/';
+      router.push(newPath);
+    } else {
+      // Switch to Hindi: Add '/hi' to the beginning of the URL
+      const newPath = `/hi${pathname === '/' ? '' : pathname}`;
+      router.push(newPath);
+    }
+  };
+
   return (
-    <div className="lg:hidden flex items-center gap-2 sm:gap-3">
-      {/* Language Switcher safely to the LEFT of the Hamburger */}
-      <div className="scale-90 transform origin-right">
-        <LanguageSwitcher />
-      </div>
+    <div className="lg:hidden flex items-center gap-2.5 sm:gap-3">
       
+      {/* 🔥 CUSTOM MOBILE LANGUAGE BUTTON (Sits on the left) */}
+      <button 
+        onClick={toggleLanguage} 
+        className="flex items-center justify-center px-3 py-1.5 sm:py-2 bg-white border border-gray-200 rounded-xl text-sm font-extrabold text-[#1A361A] shadow-sm active:scale-95 transition-transform gap-1.5"
+      >
+        <Languages size={16} className="text-[#1EAD16]" />
+        {isHindi ? "EN" : "हिं"}
+      </button>
+      
+      {/* HAMBURGER BUTTON (Sits on the right) */}
       <button onClick={() => setIsOpen(true)} className="text-[#1A361A] p-1.5 sm:p-2 bg-green-50 rounded-xl active:scale-95 transition-transform">
         <Menu size={24} />
       </button>
 
-      {/* Slide-out Hamburger Menu using Portal to escape the Header container */}
+      {/* Slide-out Hamburger Menu using Portal */}
       {mounted && isOpen && createPortal(
         <div className="fixed inset-0 bg-white z-[9999] flex flex-col p-6 animate-fade-in overflow-y-auto">
           <div className="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">

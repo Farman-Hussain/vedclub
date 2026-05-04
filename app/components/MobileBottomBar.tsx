@@ -21,16 +21,16 @@ export default function MobileBottomBar({ searchData }: { searchData: any[] }) {
 
   return (
     <>
-      {/* 1. STICKY BOTTOM BAR */}
+      {/* 1. STICKY BOTTOM BAR (Sleeker Height) */}
       <div className="md:hidden fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-lg border-t border-gray-100 z-[90] pb-safe shadow-[0_-10px_40px_rgba(0,0,0,0.08)]">
-        <div className="flex p-3 gap-3">
+        <div className="flex p-2 gap-2">
           {/* SEARCH BUTTON (Left) */}
-          <button onClick={() => setIsSearchOpen(true)} className="flex items-center justify-center w-14 h-14 bg-gray-50 border border-gray-100 rounded-2xl text-gray-600 active:scale-95 transition-transform shadow-sm">
-            <Search size={24} />
+          <button onClick={() => setIsSearchOpen(true)} className="flex items-center justify-center w-12 h-12 bg-gray-50 border border-gray-100 rounded-xl text-gray-600 active:scale-95 transition-transform shadow-sm">
+            <Search size={22} />
           </button>
           {/* CONSULT BUTTON (Right) */}
-          <Link href={isHindi ? "/hi/consultation" : "/consultation"} className="flex-1 bg-[#1A361A] text-white flex items-center justify-center rounded-2xl font-bold text-lg gap-2 shadow-lg shadow-green-900/20 active:scale-95 transition-transform">
-            <Calendar size={20} /> {isHindi ? "परामर्श बुक करें" : "Book Consult"}
+          <Link href={isHindi ? "/hi/consultation" : "/consultation"} className="flex-1 bg-[#1A361A] text-white flex items-center justify-center rounded-xl font-bold text-base gap-2 shadow-lg shadow-green-900/20 active:scale-95 transition-transform">
+            <Calendar size={18} /> {isHindi ? "परामर्श बुक करें" : "Book Consult"}
           </Link>
         </div>
       </div>

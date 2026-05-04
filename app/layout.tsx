@@ -48,12 +48,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <HideOnStudio>
           <header className="sticky top-0 z-[100] bg-white/90 backdrop-blur-lg border-b border-green-100 shadow-sm transition-all duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex justify-between items-center h-20">
+              <div className="flex justify-between items-center h-16 md:h-20">
                 {/* LOGO */}
-                <Link href="/" className="flex items-center gap-2 group">
-                  <Leaf className="text-[#1EAD16] group-hover:scale-110 transition-transform duration-300" size={32} />
-                  <span className="text-3xl font-extrabold text-[#1EAD16] tracking-tight">Ved Club</span>
+                <Link href="/" className="flex items-center gap-1.5 md:gap-2 group shrink-0">
+                  <Leaf className="text-[#1EAD16] group-hover:scale-110 transition-transform duration-300 w-7 h-7 md:w-8 md:h-8" />
+                  <span className="text-2xl md:text-3xl font-extrabold text-[#1EAD16] tracking-tight">Ved Club</span>
                 </Link>
+
+                {/* DESKTOP NAVIGATION (Stays the same!) */}
 
                 {/* DESKTOP NAVIGATION */}
                 <nav className="hidden lg:flex space-x-6 font-medium text-sm items-center">
@@ -81,7 +83,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </HideOnStudio>
 
         {/* 🔥 ADDED pb-24 so content isn't covered by sticky footer on mobile! */}
-        <main className="min-h-screen pb-24 md:pb-0">
+        <main className="min-h-screen pb-20 md:pb-0">
           {children}
         </main>
 

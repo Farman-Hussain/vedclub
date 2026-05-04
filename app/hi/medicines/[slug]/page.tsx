@@ -150,6 +150,11 @@ export default async function HindiMedicinePage({ params }: { params: Promise<{ 
               </div>
             </section>
           )}
+          {/* 🔥 MOBILE DOCTOR INFO */}
+          <div className="block md:hidden mt-12 pt-8 border-t border-green-100">
+            <h3 className="font-bold text-[#1A361A] mb-4 uppercase tracking-wider text-sm">चिकित्सा समीक्षक</h3>
+            <DoctorSidebar author={med.author} layout="vertical" />
+          </div>
         </div>
       </div>
     </div>

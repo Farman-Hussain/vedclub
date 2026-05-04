@@ -155,6 +155,11 @@ export default async function DietDetailPage({ params }: { params: Promise<{ slu
               <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 text-sm text-gray-600"><PortableText value={diet.references} components={ptComponents} /></div>
             </section>
           )}
+          {/* 🔥 MOBILE DOCTOR INFO */}
+          <div className="block md:hidden mt-12 pt-8 border-t border-green-100">
+            <h3 className="font-bold text-[#1A361A] mb-4 uppercase tracking-wider text-sm">Reviewed By</h3>
+            <DoctorSidebar author={diet.author} layout="vertical" />
+          </div>
         </div>
       </div>
     </div>

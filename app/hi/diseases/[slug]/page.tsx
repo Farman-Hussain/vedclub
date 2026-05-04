@@ -177,7 +177,11 @@ export default async function HindiDiseaseDetailPage({ params }: { params: Promi
               <div className="text-gray-700 text-lg leading-relaxed"><PortableText value={disease.conclusion} components={ptComponents} /></div>
             </section>
           )}
-
+{/* 🔥 MOBILE DOCTOR INFO */}
+          <div className="block md:hidden mt-12 pt-8 border-t border-green-100">
+            <h3 className="font-bold text-[#1A361A] mb-4 uppercase tracking-wider text-sm">चिकित्सा समीक्षक</h3>
+            <DoctorSidebar author={disease.author} layout="vertical" />
+          </div>
         </div>
       </div>
     </div>

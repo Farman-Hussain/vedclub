@@ -171,6 +171,11 @@ export default async function MedicinePage({ params }: { params: Promise<{ slug:
               </div>
             </section>
           )}
+          {/* 🔥 MOBILE DOCTOR INFO */}
+          <div className="block md:hidden mt-12 pt-8 border-t border-green-100">
+            <h3 className="font-bold text-[#1A361A] mb-4 uppercase tracking-wider text-sm">Reviewed By</h3>
+            <DoctorSidebar author={med.author} layout="vertical" />
+          </div>
         </div>
       </div>
     </div>

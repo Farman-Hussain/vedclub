@@ -1,0 +1,41 @@
+import { client } from "@/sanity/client";
+import { Activity } from "lucide-react";
+import SearchGrid from "@/app/components/SearchGrid";
+
+export const revalidate = 60;
+
+async function getHindiTreatments() {
+  const query = `*[_type == "treatment" && language == 'hi'] | order(title asc) {
+    title, slug, images, seoDescription, shortDescription
+  }`;
+  return await client.fetch(query);
+}
+
+export default async function HindiTreatmentsIndexPage() {
+  const treatments = await getHindiTreatments();
+
+  return (
+    <div className="bg-[#F9FAF8] min-h-screen pb-24">
+      <section className="bg-[#1A361A] text-white pt-20 pb-36 px-4 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 -left-24 w-72 h-72 bg-blue-600 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center relative z-10 animate-fade-in">
+          <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-blue-200 text-sm font-bold mb-6 border border-white/20">
+            <Activity size={16} /> नैदानिक प्रक्रियाएं
+          </div>
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">आयुर्वेदिक चिकित्सा</h1>
+          <p className="text-xl text-blue-50 max-w-2xl mx-auto leading-relaxed">
+            पंचकर्म, शिरोधारा और अन्य शास्त्रीय प्रक्रियाओं के लिए विस्तृत मार्गदर्शिका और लाभ।
+          </p>
+        </div>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-24 relative z-20">
+        <SearchGrid items={treatments} type="चिकित्सा" basePath="/hi/treatments" />
+      </section>
+    </div>
+  );
+}

@@ -1,17 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // 🔥 Added to detect Hindi
 import { Search, Calendar, ChevronRight } from "lucide-react";
 
 export default function MobileBottomBar({ searchData }: { searchData: any[] }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const pathname = usePathname();
   
-  // Disable body scroll when full-screen search is open
+  // Auto-detect Hindi pages
+  const isHindi = pathname.startsWith("/hi");
+  
   useEffect(() => {
     if (isSearchOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "auto";
-  },[isSearchOpen]);
+  }, [isSearchOpen]);
 
   const results = searchData.filter(item => item.title.toLowerCase().includes(query.toLowerCase())).slice(0, 8);
 
@@ -25,8 +29,8 @@ export default function MobileBottomBar({ searchData }: { searchData: any[] }) {
             <Search size={24} />
           </button>
           {/* CONSULT BUTTON (Right) */}
-          <Link href="/consultation" className="flex-1 bg-[#1A361A] text-white flex items-center justify-center rounded-2xl font-bold text-lg gap-2 shadow-lg shadow-green-900/20 active:scale-95 transition-transform">
-            <Calendar size={20} /> Book Consult
+          <Link href={isHindi ? "/hi/consultation" : "/consultation"} className="flex-1 bg-[#1A361A] text-white flex items-center justify-center rounded-2xl font-bold text-lg gap-2 shadow-lg shadow-green-900/20 active:scale-95 transition-transform">
+            <Calendar size={20} /> {isHindi ? "परामर्श बुक करें" : "Book Consult"}
           </Link>
         </div>
       </div>
@@ -40,14 +44,14 @@ export default function MobileBottomBar({ searchData }: { searchData: any[] }) {
               <input 
                 autoFocus
                 type="text" 
-                placeholder="Search diseases, herbs, diets..." 
+                placeholder={isHindi ? "रोग, जड़ी-बूटियां खोजें..." : "Search diseases, herbs, diets..."}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className="w-full bg-transparent outline-none text-lg text-gray-800"
               />
             </div>
             <button onClick={() => {setIsSearchOpen(false); setQuery("");}} className="p-3 text-red-500 font-bold active:scale-95 transition-transform">
-              Cancel
+              {isHindi ? "रद्द करें" : "Cancel"}
             </button>
           </div>
           
@@ -66,12 +70,16 @@ export default function MobileBottomBar({ searchData }: { searchData: any[] }) {
                   ))}
                 </div>
               ) : (
-                <div className="text-center text-gray-400 mt-10 text-lg">No results found for "{query}"</div>
+                <div className="text-center text-gray-400 mt-10 text-lg">
+                  {isHindi ? `"${query}" के लिए कोई परिणाम नहीं मिला` : `No results found for "${query}"`}
+                </div>
               )
             ) : (
               <div className="text-center text-gray-400 mt-16 flex flex-col items-center">
                 <Search size={48} className="opacity-20 mb-4"/>
-                <p className="text-lg">Type to search our Ayurvedic database</p>
+                <p className="text-lg">
+                  {isHindi ? "हमारे आयुर्वेदिक डेटाबेस को खोजने के लिए टाइप करें" : "Type to search our Ayurvedic database"}
+                </p>
               </div>
             )}
           </div>

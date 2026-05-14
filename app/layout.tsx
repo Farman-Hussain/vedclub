@@ -55,15 +55,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   <span className="text-2xl md:text-3xl font-extrabold text-[#1EAD16] tracking-tight">Ved Club</span>
                 </Link>
 
-                {/* DESKTOP NAVIGATION (Stays the same!) */}
-
-                {/* DESKTOP NAVIGATION */}
+                {/* 🔥 DESKTOP NAVIGATION (Fixed Text Color) */}
                 <nav className="hidden lg:flex space-x-6 font-medium text-sm items-center">
-                  <Link href="/diseases" className="flex items-center gap-1 hover:text-[#1EAD16] transition-colors"><HeartPulse size={16}/> Diseases</Link>
-                  <Link href="/treatments" className="flex items-center gap-1 hover:text-[#1EAD16] transition-colors"><Stethoscope size={16}/> Treatments</Link>
-                  <Link href="/herbs" className="flex items-center gap-1 hover:text-[#1EAD16] transition-colors"><Leaf size={16}/> Herbs</Link>
-                  <Link href="/medicines" className="flex items-center gap-1 hover:text-[#1EAD16] transition-colors"><BookOpen size={16}/> Medicines</Link>
-                  <Link href="/diets" className="flex items-center gap-1 hover:text-[#1EAD16] transition-colors"><Utensils size={16}/> Diets</Link>
+                  <Link href="/diseases" className="flex items-center gap-1 text-[#1A361A] hover:text-[#1EAD16] transition-colors"><HeartPulse size={16}/> Diseases</Link>
+                  <Link href="/treatments" className="flex items-center gap-1 text-[#1A361A] hover:text-[#1EAD16] transition-colors"><Stethoscope size={16}/> Treatments</Link>
+                  <Link href="/herbs" className="flex items-center gap-1 text-[#1A361A] hover:text-[#1EAD16] transition-colors"><Leaf size={16}/> Herbs</Link>
+                  <Link href="/medicines" className="flex items-center gap-1 text-[#1A361A] hover:text-[#1EAD16] transition-colors"><BookOpen size={16}/> Medicines</Link>
+                  <Link href="/diets" className="flex items-center gap-1 text-[#1A361A] hover:text-[#1EAD16] transition-colors"><Utensils size={16}/> Diets</Link>
                   
                   {/* Language Switcher on Desktop */}
                   <div className="border-l border-gray-200 pl-6 ml-2">
@@ -75,14 +73,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   </Link>
                 </nav>
 
-                {/* 🔥 MOBILE MENU (Hamburger & Language Switcher) */}
+                {/* MOBILE MENU (Hamburger & Language Switcher) */}
                 <MobileMenu />
               </div>
             </div>
           </header>
         </HideOnStudio>
 
-        {/* 🔥 ADDED pb-24 so content isn't covered by sticky footer on mobile! */}
+        {/* ADDED pb-24 so content isn't covered by sticky footer on mobile! */}
         <main className="min-h-screen pb-20 md:pb-0">
           {children}
         </main>
@@ -129,7 +127,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <p className="text-sm font-bold text-green-500 mt-8 text-center">© {new Date().getFullYear()} Ved Club. All rights reserved.</p>
           </footer>
           
-          {/* 🔥 STICKY MOBILE BOTTOM BAR */}
+          {/* STICKY MOBILE BOTTOM BAR */}
           <MobileBottomBar searchData={searchCatalog} />
         </HideOnStudio>
 
